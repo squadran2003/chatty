@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  django:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      
+    user: ${CURRENT_UID}
+    environment:
+      # - change this to your settings file
+      - DJANGO_SETTINGS_MODULE=config.settings
+
+    command: >
+      sh -c "
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8080"
+    volumes:
+      # change to your base directory
+      - ./:/usr/src/chatty/
+    ports:
+      - 8080:8080
+    env_file:
+      # put the env fie in the same directory as the manage.py file
+      - ./chatty/.env
+    depends_on:
+      - db2
+    networks:
+      # create your own network
+      - db-net3
+  db2:
+    restart: always
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./chatty/.env
+    networks:
+      # create your own network
+      - db-net3
+volumes:
+  postgres_data:
+
+networks:
+  db-net3:
+    driver: bridge
