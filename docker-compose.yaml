@@ -29,6 +29,21 @@ services:
     networks:
       # create your own network
       - db-net3
+  web:
+    restart: always
+    build:
+      context: ./chatty/frontend/
+      dockerfile: Dockerfile
+    command: npm start
+    volumes:
+      - ./chatty/frontend:/usr/src/chatty/chatty/frontend
+    ports:
+      - 3000:3000
+    stdin_open: true
+    depends_on:
+      - django
+    networks:
+      - db-net3
   db2:
     restart: always
     image: postgres:12.0-alpine
