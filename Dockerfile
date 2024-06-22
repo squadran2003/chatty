@@ -16,7 +16,7 @@ RUN pip install poetry
 
 
 RUN poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-ansi
+    && poetry lock --no-update && poetry install --only main --no-interaction --no-ansi 
 
 # set the working directory to where the manage.py file is located
 WORKDIR /usr/src/chatty/chatty/
