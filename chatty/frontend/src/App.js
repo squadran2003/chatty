@@ -9,24 +9,13 @@ import Logout from './pages/logout.js';
 import Home from './pages/home.js';
 
 function App() {
-  let loggedIn = false;
-  let url = "http://localhost:8000/api/token/";
-  let refreshUrl = "http://localhost:8000/api/token/refresh/";
-  // check if token exists
-  if(localStorage.getItem('token')){
-    loggedIn = true;
-  }else{
-    loggedIn = false;
-  }
 
   return(
     <div>
-       <Nav loggedIn={loggedIn}/>
+       <Nav loggedIn={false}/>
         <Container fluid>
           <Routes>
-              <Route path="/" element={loggedIn?<Home/>:<Navigate to="/login"/>}/>
-              <Route path="/login" element={<Login />} />
-              <Route path="/logout" element={<Logout/>} />
+              <Route path="/" element={<Home/>}/>
           </Routes>
       </Container>
     </div>

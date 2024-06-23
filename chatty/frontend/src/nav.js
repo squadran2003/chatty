@@ -12,7 +12,7 @@ function defaultNav({loggedIn}){
   }
   return (
     <Navbar bg="primary" data-bs-theme="dark" className='p-2'>
-          <Navbar.Brand href="/">Fundme</Navbar.Brand>
+          <Navbar.Brand href="/">Chat</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
           </Nav>
