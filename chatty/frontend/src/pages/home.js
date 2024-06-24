@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 
 
 
+
+
+
 class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +15,9 @@ class Chat extends React.Component {
     this.chatDisplay = React.createRef();
     this.chatMessageInput = React.createRef();
     this.sendMessage = this.sendMessage.bind(this);
+    this.buttonClicked = this.buttonClicked.bind(this);
+    this.getEmoji = this.getEmoji.bind(this);
+    this.sendButton = React.createRef();
   }
   // create a websocket connection
   componentDidMount() {
@@ -30,29 +36,75 @@ class Chat extends React.Component {
       this.chatDisplay.current.value += data.message + '\n';
     };
   }
-  chatMessageInputKeyPress(e) {
-    if (e.key === 'Enter') {
-      this.sendMessage();
+  componentWillUnmount() {
+    // Ensure the WebSocket connection is closed when the component unmounts
+    if (this.socket) {
+      this.socket.close();
     }
   }
-  sendMessage() {
-    console.log("clicked");
-    const message = this.chatMessageInput.current.value;
+
+  chatMessageInputKeyPress = (e) => {
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      this.sendMessage(this.chatMessageInput.current.value);
+      this.chatMessageInput.current.value = '';
+    }
+  }
+  buttonClicked = () => {
+    this.setState({
+      message: this.chatMessageInput.current.value
+    });
+    this.sendMessage(this.chatMessageInput.current.value);
+    this.chatMessageInput.current.value = '';
+  }
+  sendMessage(message) {
     this.socket.send(JSON.stringify({
         'message': message
     }));
   }
+  getEmoji = (event) => {
+    // Retrieve the value attribute from the clicked element
+    const emojiValue = event.target.getAttribute('value');
+    this.chatMessageInput.current.value += emojiValue;
+  };
+
   render() {
     return(
       <Row>
         <Col className="mt-4"  md={10} sm={12} style={{ height: '85vh' }}>
           <Form.Control ref={this.chatDisplay} as="textarea" style={{ height: '100%' }} />
           <Row>
-            <Col className="mt-2" sm={12} md={10}>
+            <Col className="mt-2" sm={12} md={8}>
               <Form.Control  ref={this.chatMessageInput} type="text" placeholder="Enter message" onKeyUp={this.chatMessageInputKeyPress}/>
             </Col>
             <Col className="mt-2" sm={12} md={2}>
-              <Form.Control type="submit" value="Send" className="btn btn-primary" onClick={this.sendMessage}/>
+              <div>
+                <span onClick={this.getEmoji} value="&#128512;" aria-label="smile">&#128512;</span>
+                <span onClick={this.getEmoji} value="&#128513;" aria-label="smile">&#128513;</span>
+                <span onClick={this.getEmoji} value="&#128514;" aria-label="smile">&#128514;</span>
+                <span onClick={this.getEmoji} value="&#128515;" aria-label="smile">&#128515;</span>
+                <span onClick={this.getEmoji} value="&#128516;" aria-label="smile">&#128516;</span>
+                <span onClick={this.getEmoji} value="&#128517;" aria-label="smile">&#128517;</span>
+                <span onClick={this.getEmoji} value="&#128518;" aria-label="smile">&#128518;</span>
+                <span onClick={this.getEmoji} value="&#128519;" aria-label="smile">&#128519;</span>
+                <span onClick={this.getEmoji} value="&#128520;" aria-label="smile">&#128520;</span>
+                <span onClick={this.getEmoji} value="&#128521;" aria-label="smile">&#128521;</span>
+                <span onClick={this.getEmoji} value="&#128522;" aria-label="smile">&#128522;</span>
+                <span onClick={this.getEmoji} value="&#128523;" aria-label="smile">&#128523;</span>
+                <span onClick={this.getEmoji} value="&#128524;" aria-label="smile">&#128524;</span>
+                <span onClick={this.getEmoji} value="&#128525;" aria-label="smile">&#128525;</span>
+                <span onClick={this.getEmoji} value="&#128526;" aria-label="smile">&#128526;</span>
+                <span onClick={this.getEmoji} value="&#128527;" aria-label="smile">&#128527;</span>
+                <span onClick={this.getEmoji} value="&#128528;" aria-label="smile">&#128528;</span>
+                <span onClick={this.getEmoji} value="&#128529;" aria-label="smile">&#128529;</span>
+                <span onClick={this.getEmoji} value="&#128530;" aria-label="smile">&#128530;</span>
+                <span onClick={this.getEmoji} value="&#128531;" aria-label="smile">&#128531;</span>
+                <span onClick={this.getEmoji} value="&#128532;" aria-label="smile">&#128532;</span>
+                <span onClick={this.getEmoji} value="&#128533;" aria-label="smile">&#128533;</span>
+              </div>
+            </Col>
+            <Col className="mt-2" sm={12} md={2}>
+              <Form.Control ref={this.sendButton} type="submit" value="Send" className="btn btn-primary" onClick={this.buttonClicked}/>
             </Col>
           </Row>
         </Col>
