@@ -21,9 +21,10 @@ class Login extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-
+        let url = `${process.env.REACT_APP_CHATTY_BACKEND_URL}/api/token/`;
+        url = url.replace('3000', '8080');
         // send a POST request to the backend
-        fetch('http://localhost:8080/api/token/', {
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

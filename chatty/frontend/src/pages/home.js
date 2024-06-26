@@ -20,9 +20,14 @@ class Chat extends React.Component {
     this.sendButton = React.createRef();
   }
   // create a websocket connection
-  componentDidMount() {
-    let url = `ws://${window.location.host}/ws/chat/lobby/?token=${localStorage.getItem('token')}`;
-    url = url.replace('3000', '8080');
+  componentWillMount() {
+    let url = process.env.REACT_APP_CHATTY_BACKEND_URL
+    if(url.includes('http')) {
+      url = url.replace('http', 'ws');
+    } else {
+      url = url.replace('https', 'wss');
+    }
+    url = `${url}/ws/chat/lobby/?token=${localStorage.getItem('token')}`;
     this.socket = new WebSocket(url);
     console.log(this.socket);
     // check if websocket connection is open
@@ -44,7 +49,6 @@ class Chat extends React.Component {
   }
 
   chatMessageInputKeyPress = (e) => {
-    console.log(e.key);
     if (e.key === 'Enter') {
       this.sendMessage(this.chatMessageInput.current.value);
       this.chatMessageInput.current.value = '';
