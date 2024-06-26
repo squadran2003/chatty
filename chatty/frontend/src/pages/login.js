@@ -10,7 +10,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            username: '',
             password: '',
             Authentication:{
                 error: false,
@@ -23,7 +23,7 @@ class Login extends React.Component {
         event.preventDefault();
 
         // send a POST request to the backend
-        fetch('http://localhost:8000/api/token/', {
+        fetch('http://localhost:8080/api/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

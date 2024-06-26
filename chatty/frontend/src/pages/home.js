@@ -21,7 +21,7 @@ class Chat extends React.Component {
   }
   // create a websocket connection
   componentDidMount() {
-    let url = `ws://${window.location.host}/ws/chat/lobby/`;
+    let url = `ws://${window.location.host}/ws/chat/lobby/?token=${localStorage.getItem('token')}`;
     url = url.replace('3000', '8080');
     this.socket = new WebSocket(url);
     console.log(this.socket);
