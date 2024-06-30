@@ -5,10 +5,12 @@ FROM python:3.10.13-bullseye
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+
+
 # change <botify> to your project name
 WORKDIR /usr/src/chatty
 
-COPY pyproject.toml poetry.lock ./
+COPY . .
 
 
 RUN pip install poetry
@@ -16,7 +18,11 @@ RUN pip install poetry
 
 
 RUN poetry config virtualenvs.create false \
-    && poetry lock --no-update && poetry install --only main --no-interaction --no-ansi 
+    && poetry lock --no-update && poetry install --only main --no-interaction --no-ansi
+
 
 # set the working directory to where the manage.py file is located
 WORKDIR /usr/src/chatty/chatty/
+
+
+

@@ -19,11 +19,12 @@ services:
     environment:
       # - change this to your settings file
       - DJANGO_SETTINGS_MODULE=config.settings
+      - REACT_APP_DEV=1
 
     command: >
       sh -c "
-             python manage.py migrate &&
-             daphne -b 0.0.0.0 -p 8080 config.asgi:application"
+              python manage.py migrate &&
+              daphne -b 0.0.0.0 -p 8080 config.asgi:application"
     volumes:
       # change to your base directory
       - ./:/usr/src/chatty/
@@ -33,7 +34,7 @@ services:
       # put the env fie in the same directory as the manage.py file
       - ./chatty/.env
     depends_on:
-      - db3
+      - web
     networks:
       # create your own network
       - db-net3
@@ -42,16 +43,19 @@ services:
     build:
       context: ./chatty/frontend/
       dockerfile: Dockerfile
-    command: npm start
+    command: >
+      sh -c "
+             npm start"
     environment:
-      - REACT_APP_CHATTY_BACKEND_URL=http://127.0.0.1:8080
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+      - REACT_APP_WS_URL=ws://localhost:8080
     volumes:
       - ./chatty/frontend:/usr/src/chatty/chatty/frontend
     ports:
       - 3000:3000
     stdin_open: true
     depends_on:
-      - django
+      - db3
     networks:
       - db-net3
   db3:
@@ -66,6 +70,9 @@ services:
       - db-net3
 volumes:
   postgres_data:
+
+
+
 
 networks:
   db-net3:

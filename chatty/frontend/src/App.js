@@ -24,7 +24,9 @@ class App extends React.Component {
     }
     console.log(token)
     // send a POST request to the backend
-    fetch('http://localhost:8080/chat/lobby/', {
+    let url1 = `${process.env.REACT_APP_BACKEND_URL}/chat/lobby/`;
+    let url2 = `${process.env.REACT_APP_BACKEND_URL}/api/token/refresh/`;
+    fetch(url1, {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
@@ -37,7 +39,7 @@ class App extends React.Component {
               this.setState({loggedIn:true})
           }else{
               fetch(
-                'http://localhost:8080/api/token/refresh/',{
+               url2,{
                   method:'POST',
                   headers: {
                     'Content-Type': 'application/json',
