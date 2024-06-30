@@ -18,6 +18,11 @@ class Chat extends React.Component {
     this.buttonClicked = this.buttonClicked.bind(this);
     this.getEmoji = this.getEmoji.bind(this);
     this.sendButton = React.createRef();
+    this.styles = {
+      emoji :{
+        cursor: 'pointer',
+      }
+    }
   }
   // create a websocket connection
   componentWillMount() {
@@ -77,28 +82,28 @@ class Chat extends React.Component {
             </Col>
             <Col className="mt-2" sm={12} md={2}>
               <div>
-                <span onClick={this.getEmoji} value="&#128512;" aria-label="smile">&#128512;</span>
-                <span onClick={this.getEmoji} value="&#128513;" aria-label="smile">&#128513;</span>
-                <span onClick={this.getEmoji} value="&#128514;" aria-label="smile">&#128514;</span>
-                <span onClick={this.getEmoji} value="&#128515;" aria-label="smile">&#128515;</span>
-                <span onClick={this.getEmoji} value="&#128516;" aria-label="smile">&#128516;</span>
-                <span onClick={this.getEmoji} value="&#128517;" aria-label="smile">&#128517;</span>
-                <span onClick={this.getEmoji} value="&#128518;" aria-label="smile">&#128518;</span>
-                <span onClick={this.getEmoji} value="&#128519;" aria-label="smile">&#128519;</span>
-                <span onClick={this.getEmoji} value="&#128520;" aria-label="smile">&#128520;</span>
-                <span onClick={this.getEmoji} value="&#128521;" aria-label="smile">&#128521;</span>
-                <span onClick={this.getEmoji} value="&#128522;" aria-label="smile">&#128522;</span>
-                <span onClick={this.getEmoji} value="&#128523;" aria-label="smile">&#128523;</span>
-                <span onClick={this.getEmoji} value="&#128524;" aria-label="smile">&#128524;</span>
-                <span onClick={this.getEmoji} value="&#128525;" aria-label="smile">&#128525;</span>
-                <span onClick={this.getEmoji} value="&#128526;" aria-label="smile">&#128526;</span>
-                <span onClick={this.getEmoji} value="&#128527;" aria-label="smile">&#128527;</span>
-                <span onClick={this.getEmoji} value="&#128528;" aria-label="smile">&#128528;</span>
-                <span onClick={this.getEmoji} value="&#128529;" aria-label="smile">&#128529;</span>
-                <span onClick={this.getEmoji} value="&#128530;" aria-label="smile">&#128530;</span>
-                <span onClick={this.getEmoji} value="&#128531;" aria-label="smile">&#128531;</span>
-                <span onClick={this.getEmoji} value="&#128532;" aria-label="smile">&#128532;</span>
-                <span onClick={this.getEmoji} value="&#128533;" aria-label="smile">&#128533;</span>
+                <span onClick={this.getEmoji} value="&#128512;" aria-label="smile" style={this.styles.emoji}>&#128512;</span>
+                <span onClick={this.getEmoji} value="&#128513;" aria-label="smile" style={this.styles.emoji}>&#128513;</span>
+                <span onClick={this.getEmoji} value="&#128514;" aria-label="smile" style={this.styles.emoji}>&#128514;</span>
+                <span onClick={this.getEmoji} value="&#128515;" aria-label="smile" style={this.styles.emoji}>&#128515;</span>
+                <span onClick={this.getEmoji} value="&#128516;" aria-label="smile" style={this.styles.emoji}>&#128516;</span>
+                <span onClick={this.getEmoji} value="&#128517;" aria-label="smile" style={this.styles.emoji}>&#128517;</span>
+                <span onClick={this.getEmoji} value="&#128518;" aria-label="smile" style={this.styles.emoji}>&#128518;</span>
+                <span onClick={this.getEmoji} value="&#128519;" aria-label="smile" style={this.styles.emoji}>&#128519;</span>
+                <span onClick={this.getEmoji} value="&#128520;" aria-label="smile" style={this.styles.emoji}>&#128520;</span>
+                <span onClick={this.getEmoji} value="&#128521;" aria-label="smile" style={this.styles.emoji}>&#128521;</span>
+                <span onClick={this.getEmoji} value="&#128522;" aria-label="smile" style={this.styles.emoji}>&#128522;</span>
+                <span onClick={this.getEmoji} value="&#128523;" aria-label="smile" style={this.styles.emoji}>&#128523;</span>
+                <span onClick={this.getEmoji} value="&#128524;" aria-label="smile" style={this.styles.emoji}>&#128524;</span>
+                <span onClick={this.getEmoji} value="&#128525;" aria-label="smile" style={this.styles.emoji}>&#128525;</span>
+                <span onClick={this.getEmoji} value="&#128526;" aria-label="smile" style={this.styles.emoji}>&#128526;</span>
+                <span onClick={this.getEmoji} value="&#128527;" aria-label="smile" style={this.styles.emoji}>&#128527;</span>
+                <span onClick={this.getEmoji} value="&#128528;" aria-label="smile" style={this.styles.emoji}>&#128528;</span>
+                <span onClick={this.getEmoji} value="&#128529;" aria-label="smile" style={this.styles.emoji}>&#128529;</span>
+                <span onClick={this.getEmoji} value="&#128530;" aria-label="smile" style={this.styles.emoji}>&#128530;</span>
+                <span onClick={this.getEmoji} value="&#128531;" aria-label="smile" style={this.styles.emoji}>&#128531;</span>
+                <span onClick={this.getEmoji} value="&#128532;" aria-label="smile" style={this.styles.emoji}>&#128532;</span>
+                <span onClick={this.getEmoji} value="&#128533;" aria-label="smile" style={this.styles.emoji}>&#128533;</span>
               </div>
             </Col>
             <Col className="mt-2" sm={12} md={2}>
