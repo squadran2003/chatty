@@ -28,5 +28,6 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path("chat/<str:room_name>/", views.room, name="room"),
+    path("chat/users/<str:online_users>/", views.users, name="users"),
     path("", views.index, name="index.html"),
 ]

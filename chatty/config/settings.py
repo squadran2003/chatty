@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_simplejwt',
     'channels',
+    'activity'
 ]
 
 MIDDLEWARE = [
@@ -175,9 +176,4 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-STATIC_URL = "static/"
-STATIC_ROOT = "static/"
-
-STATIC_FILES_DIRS = [
-    os.path.join(BASE_DIR, "assets"),
-]
+STATIC_URL = '/static/'

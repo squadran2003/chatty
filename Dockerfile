@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 # change <botify> to your project name
 WORKDIR /usr/src/chatty
 
-COPY . .
+COPY pyproject.toml poetry.lock ./
 
 
 RUN pip install poetry

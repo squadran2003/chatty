@@ -12,7 +12,8 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      loggedIn:false
+      loggedIn:false,
+      token:null
     }
   }
 
@@ -36,7 +37,7 @@ class App extends React.Component {
       .then(response => {
         console.log(response.status)
           if (response.status === 200) {
-              this.setState({loggedIn:true})
+              this.setState({loggedIn:true, token:token})
           }else{
               fetch(
                url2,{
@@ -50,7 +51,7 @@ class App extends React.Component {
                 return response.json();
               })
               .then(data=>{
-                console.log(data);
+                this.setState({loggedIn:true, token:data.access})
               })
           }
       
@@ -66,7 +67,7 @@ class App extends React.Component {
          <Nav loggedIn={this.state.loggedIn}/>
           <Container fluid>
             <Routes>
-                <Route path="/" element={this.state.loggedIn?<Home/>:<Login/>}/>
+                <Route path="/" element={this.state.loggedIn?<Home token={this.state.token}/>:<Login/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>
             </Routes>

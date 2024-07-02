@@ -1,6 +1,66 @@
 import json
+from channels.db import database_sync_to_async
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import (
+    WebsocketConsumer, AsyncWebsocketConsumer
+)
+
+
+
+class OnlineConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        self.user = self.scope["user"]
+        print(self.user)
+        if self.user.is_authenticated:
+            print("connected user")
+            await self.add_user()
+            await self.channel_layer.group_add("online_users", self.channel_name)
+            await self.accept()
+            await self.send_online_users()
+
+    async def disconnect(self, close_code):
+        if self.user.is_authenticated:
+            await self.remove_user()
+            await self.channel_layer.group_discard("online_users", self.channel_name)
+
+    async def receive(self, text_data):
+        pass
+
+    async def send_online_users(self):
+        online_users = await self.get_online_users()
+        print(online_users)
+        await self.channel_layer.group_send(
+            "online_users",
+            {
+                "type": "online.users",
+                "users": online_users,
+            },
+        )
+
+    async def online_users(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "online_users",
+            "users": event["users"],
+        }))
+
+    @database_sync_to_async
+    def add_user(self):
+        from activity.models import Active
+        user, _ = Active.objects.get_or_create(user=self.user)
+        user.is_online = True
+        user.save()
+        return user
+
+    @database_sync_to_async
+    def remove_user(self):
+
+        from activity.models import Active
+        return Active.objects.filter(id=self.user.id).update(is_online=False)
+
+    @database_sync_to_async
+    def get_online_users(self):
+        from activity.models import Active
+        return [i.user.username for i in Active.objects.filter(is_online=True)]
 
 
 class ChatConsumer(WebsocketConsumer):

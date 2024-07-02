@@ -2,7 +2,7 @@ import React from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-
+import Sidebar from "../components/sidebar";
 
 
 
@@ -18,15 +18,18 @@ class Chat extends React.Component {
     this.buttonClicked = this.buttonClicked.bind(this);
     this.getEmoji = this.getEmoji.bind(this);
     this.sendButton = React.createRef();
+    this.onlineUsersList = React.createRef();
     this.styles = {
       emoji :{
         cursor: 'pointer',
       }
     }
+
   }
   // create a websocket connection
   componentWillMount() {
-    let url = `${process.env.REACT_APP_WS_URL}/ws/chat/lobby/?token=${localStorage.getItem('token')}`;
+    // this.onlineUsers();
+    let url = `${process.env.REACT_APP_WS_URL}/ws/chat/lobby/?token=${this.props.token}`;
     this.socket = new WebSocket(url);
     console.log(this.socket);
     // check if websocket connection is open
@@ -47,6 +50,22 @@ class Chat extends React.Component {
     }
   }
 
+
+  // onlineUsers = () => {
+  //   const url = `${process.env.REACT_APP_WS_URL}/ws/chat/users/online_users/?token=${this.props.token}`;
+  //   this.socket = new WebSocket(url);
+  //   this.socket.onopen = (e) => {
+  //     console.log('web socket open', e);
+  //   };
+
+  //   this.socket.onmessage = (e) => {
+  //     const data = JSON.parse(e.data);
+  //     console.log(data);
+  //     this.setState({
+  //       onlineUsers: data.users
+  //     });
+  //   };
+  // }
   chatMessageInputKeyPress = (e) => {
     if (e.key === 'Enter') {
       this.sendMessage(this.chatMessageInput.current.value);
@@ -74,6 +93,9 @@ class Chat extends React.Component {
   render() {
     return(
       <Row>
+         <Col className="mt-4" sm={12} md={2}>
+          <Sidebar token={this.props.token}/>
+        </Col>
         <Col className="mt-4"  md={10} sm={12} style={{ height: '85vh' }}>
           <Form.Control ref={this.chatDisplay} as="textarea" style={{ height: '100%' }} />
           <Row>
@@ -110,14 +132,6 @@ class Chat extends React.Component {
               <Form.Control ref={this.sendButton} type="submit" value="Send" className="btn btn-primary" onClick={this.buttonClicked}/>
             </Col>
           </Row>
-        </Col>
-        <Col className="mt-4" sm={12} md={2}>
-          <h3>Online Users</h3>
-          <ul>
-            <li>user1</li>
-            <li>user2</li>
-            <li>user3</li>
-          </ul>
         </Col>
       </Row>
     )
