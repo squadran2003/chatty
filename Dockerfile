@@ -22,7 +22,7 @@ RUN poetry config virtualenvs.create false \
 
 
 # set the working directory to where the manage.py file is located
-WORKDIR /usr/src/chatty/chatty/chatty/
+WORKDIR /usr/src/chatty/chatty/
 
 
 
