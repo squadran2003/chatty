@@ -41,9 +41,9 @@ services:
     build:
       context: ./chatty/frontend/
       dockerfile: Dockerfile
-    command: >
-      sh -c "
-             npm start"
+    # command: >
+    #   sh -c "
+    #          npm start"
     environment:
       - REACT_APP_BACKEND_URL=http://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
       - REACT_APP_WS_URL=ws://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
