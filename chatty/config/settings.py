@@ -28,11 +28,13 @@ SECRET_KEY = config('SECRET_KEY', 'django-insecure-#&z!_!@')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS',default='127.0.0.1', cast=Csv())
-DB_NAME = config('DB_NAME')
-DB_USER = config('DB_USER')
-DB_PASSWORD = config('DB_PASSWORD')
-DB_HOST = config('DB_HOST')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
+SECRET_KEY = config('SECRET_KEY', os.environ.get('SECRET_KEY'))
+DB_NAME = config('DB_NAME', default=os.environ.get('DB_NAME'))
+DB_USER = config('DB_USER', default=os.environ.get('DB_USER'))
+DB_PASSWORD = config('DB_PASSWORD', default=os.environ.get('DB_PASSWORD'))
+DB_HOST = config('DB_HOST', default=os.environ.get('DB_HOST'))
+DJANGO_SETTINGS_MODULE = config('DJANGO_SETTINGS_MODULE', default=os.environ.get('DJANGO_SETTINGS_MODULE'))
 
 
 
