@@ -6,13 +6,14 @@ services:
     ports:
       - 443:443
       - 80:80
+      - 8000:8000
     depends_on:
       - api
     networks:
       - botify
     volumes:
       # change to your static path
-      - static:/home/ubuntu/app/botify/botify/static/
+      - static:/home/ubuntu/app/chatty/chatty/static/
       - /etc/letsencrypt:/etc/letsencrypt
   django:
     restart: always
