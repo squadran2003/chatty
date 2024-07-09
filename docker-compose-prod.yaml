@@ -23,14 +23,15 @@ services:
     environment:
       # set to your production settings file
       - DJANGO_SETTINGS_MODULE=config.production_settings
+      - REACT_APP_DEV=0
     command: >
       sh -c "
               python manage.py migrate && 
               python manage.py collectstatic --noinput &&
               daphne -b 0.0.0.0 -p 8000 config.asgi:application"
     volumes:
-      - ./:/usr/src/config/
-      - static:/usr/src/config/config/static/
+      - ./:/usr/src/chatty/
+      - static:/usr/src/chatty/chatty/static/
     expose:
       - 8000
     networks:
