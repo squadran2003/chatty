@@ -26,7 +26,7 @@ services:
       sh -c "
               python manage.py migrate && 
               python manage.py collectstatic --noinput &&
-              gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+              daphne -b 0.0.0.0 -p 8000 config.asgi:application"
     volumes:
       - ./:/usr/src/config/
       - static:/usr/src/config/config/static/
@@ -34,6 +34,26 @@ services:
       - 8000
     networks:
       - config
+  web:
+    restart: always
+    build:
+      context: ./chatty/frontend/
+      dockerfile: Dockerfile
+    command: >
+      sh -c "
+             npm start"
+    environment:
+      - REACT_APP_BACKEND_URL=http://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
+      - REACT_APP_WS_URL=ws://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
+    volumes:
+      - ./chatty/frontend:/usr/src/chatty/chatty/frontend
+    ports:
+      - 3000:3000
+    stdin_open: true
+    depends_on:
+      - db3
+    networks:
+      - db-net3
 
 networks:
   config:

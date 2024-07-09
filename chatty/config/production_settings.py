@@ -5,10 +5,10 @@ import json
 
 DEBUG = False
 
-ALLOWED_HOSTS = [".botifyapp.com"]
+ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://botifyapp.com',
+    '*',
 ]
 
 
@@ -17,8 +17,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 def get_secrets():
 
-    secret_name = "botifyapp-secrets"
-    region_name = "us-east-1"
+    secret_name = "andy-chat-keys"
+    region_name = "eu-west-2"
 
     # Create a Secrets Manager client
     session = boto3.session.Session()
