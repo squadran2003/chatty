@@ -59,7 +59,6 @@ services:
 
 networks:
   config:
-    driver: bridge
 
 volumes:
   static:
