@@ -52,7 +52,7 @@ services:
       - 3000:3000
     stdin_open: true
     depends_on:
-      - db3
+      - django
     networks:
       - config
 
