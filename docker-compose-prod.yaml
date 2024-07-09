@@ -8,9 +8,9 @@ services:
       - 80:80
       - 8000:8000
     depends_on:
-      - api
+      - web
     networks:
-      - botify
+      - config
     volumes:
       # change to your static path
       - static:/home/ubuntu/app/chatty/chatty/static/
@@ -54,7 +54,7 @@ services:
     depends_on:
       - db3
     networks:
-      - db-net3
+      - config
 
 networks:
   config:
