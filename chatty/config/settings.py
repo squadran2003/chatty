@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY', 'django-insecure-#&z!_!@')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS',default='127.0.0.1', cast=Csv())
 DB_NAME = config('DB_NAME')
 DB_USER = config('DB_USER')
 DB_PASSWORD = config('DB_PASSWORD')
