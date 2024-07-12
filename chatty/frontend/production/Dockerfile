@@ -17,7 +17,7 @@ COPY . .
 
 RUN npm run build
 
-
+WORKDIR /usr/src/chatty/chatty/frontend/build/
 # Use a lightweight production image
 FROM nginx:alpine
 
