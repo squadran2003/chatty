@@ -4,7 +4,7 @@ FROM node:16.10.0-alpine3.13 as build
 
 WORKDIR /usr/src/chatty/chatty/frontend/
 
-COPY . .
+COPY package*.json ./
 
 
 RUN npm cache clean --force
