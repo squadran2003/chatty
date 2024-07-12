@@ -1,20 +1,6 @@
 version: '3.8'
 
 services:
-  nginx:
-    build: ./nginx
-    ports:
-      - 443:443
-      - 80:80
-      - 8000:8000
-    depends_on:
-      - web
-    networks:
-      - config
-    volumes:
-      # change to your static path
-      - static:/home/ubuntu/app/chatty/chatty/static/
-      - /etc/letsencrypt:/etc/letsencrypt
   django:
     restart: always
     build:
@@ -34,26 +20,30 @@ services:
       - static:/usr/src/chatty/chatty/static/
     expose:
       - 8000
+    depends_on:
+      - web
     networks:
       - config
   web:
     restart: always
     build:
-      context: ./chatty/frontend/
+      context: ./chatty/frontend/production
       dockerfile: Dockerfile
     command: >
       sh -c "
-             npm start"
+             npm run build"
     environment:
       - REACT_APP_BACKEND_URL=http://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
       - REACT_APP_WS_URL=ws://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
     volumes:
       - ./chatty/frontend:/usr/src/chatty/chatty/frontend
+      - /usr/src/chatty/chatty/frontend/node_modules
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - 3000:3000
+      - 443:443
+      - 80:80
     stdin_open: true
-    depends_on:
-      - django
     networks:
       - config
 

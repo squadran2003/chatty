@@ -6,15 +6,17 @@ WORKDIR /usr/src/chatty/chatty/frontend/
 
 
 
-COPY . .
+COPY package*.json ./
 RUN npm cache clean --force
 RUN npm install -g npm-check-updates
 RUN ncu -u
 RUN npm install
+
+COPY . .
 
 
 
 
 
 EXPOSE 3000
-CMD ["npm", "start"]
+
