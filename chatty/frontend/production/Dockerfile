@@ -22,7 +22,7 @@ RUN npm run build
 FROM nginx:1.25
 
 # Copy the built React app from the previous stage to the Nginx public directory
-COPY /usr/src/chatty/chatty/frontend/build /usr/share/nginx/html
+COPY --from=build /usr/src/chatty/chatty/frontend/dist /usr/share/nginx/html
 
 # Copy custom nginx.conf to the container
 # when using the official Nginx images
