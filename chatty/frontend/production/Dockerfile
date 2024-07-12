@@ -9,7 +9,7 @@ COPY package*.json ./
 
 RUN npm cache clean --force
 RUN npm install -g npm-check-updates
-RUN ncu -u --packageFile /usr/src/chatty/chatty/frontend//package.json
+RUN ncu -u --packageFile /usr/src/chatty/chatty/frontend/package.json
 RUN npm install /usr/src/chatty/chatty/frontend/package.json
 
 
