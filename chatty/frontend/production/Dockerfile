@@ -6,7 +6,7 @@ WORKDIR /usr/src/chatty/chatty/frontend/
 
 
 
-COPY /usr/src/chatty/chatty/frontend/package*.json ./
+COPY ../package*.json ./production/
 RUN npm cache clean --force
 RUN npm install -g npm-check-updates
 RUN ncu -u
