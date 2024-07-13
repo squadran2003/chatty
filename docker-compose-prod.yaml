@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+  web:
+      restart: always
+      build:
+        context: ./chatty/frontend/
+        dockerfile: Dockerfile
+      environment:
+        - REACT_APP_BACKEND_URL=http://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
+        - REACT_APP_WS_URL=ws://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
+      volumes:
+        - ./chatty/frontend:/usr/src/chatty/chatty/frontend
+        - react-build:/usr/src/chatty/chatty/frontend/build
+      command: >
+        sh -c "
+               npm run build"
+      stdin_open: true
   django:
     restart: always
     build:
@@ -30,12 +45,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static:/usr/share/nginx/
+      - react-build:/usr/share/nginx/html
     depends_on:
-      - django
-    environment:
-      - REACT_APP_BACKEND_URL=http://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
-      - REACT_APP_WS_URL=ws://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
+      - web
     networks:
       - config
 
@@ -44,5 +56,6 @@ networks:
 
 volumes:
   static:
+  react-build:
 
 
