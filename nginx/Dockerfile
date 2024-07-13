@@ -11,4 +11,3 @@ COPY nginx.conf /etc/nginx/conf.d
 # Use the same volume as the React app
 VOLUME /usr/share/nginx/html
 
-COPY --from=build /usr/src/chatty/chatty/frontend/build /usr/share/nginx/html
