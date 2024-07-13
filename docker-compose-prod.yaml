@@ -24,26 +24,17 @@ services:
       - web
     networks:
       - config
-  web:
+  nginx:
     restart: always
     build:
-      context: ./chatty/frontend/production
+      context: ./nginx
       dockerfile: Dockerfile
-    command: >
-      sh -c "
-             npm run build"
-    environment:
-      - REACT_APP_BACKEND_URL=http://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
-      - REACT_APP_WS_URL=ws://ec2-13-40-190-167.eu-west-2.compute.amazonaws.com:8000
-    volumes:
-      - ./chatty/frontend:/usr/src/chatty/chatty/frontend
-      - /usr/src/chatty/chatty/frontend/node_modules
-      - /etc/letsencrypt:/etc/letsencrypt
     ports:
-      - 3000:3000
-      - 443:443
-      - 80:80
-    stdin_open: true
+      - "80:80"
+    volumes:
+      - static:/usr/share/nginx/
+    depends_on:
+      - django
     networks:
       - config
 
