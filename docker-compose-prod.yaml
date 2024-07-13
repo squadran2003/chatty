@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  redis:
+      image: redis:alpine
+      ports:
+        - 6379:6379
+      depends_on:
+        - django
+      networks:
+        - db-net3
   web:
       restart: always
       build:
@@ -37,6 +45,8 @@ services:
       - 8000
     networks:
       - config
+    depends_on:
+      - web
   nginx:
     restart: always
     build:
