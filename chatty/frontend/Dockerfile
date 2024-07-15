@@ -10,6 +10,7 @@ COPY package.json ./
 RUN npm cache clean --force
 RUN npm install -g npm-check-updates
 RUN ncu -u
+RUN npm i react-scripts
 RUN npm install
 
 COPY . .
