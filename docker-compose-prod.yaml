@@ -22,7 +22,7 @@ services:
         - react-build:/usr/src/chatty/chatty/frontend/build
       command: >
         sh -c "
-               npm run build"
+               npm run build "
       stdin_open: true
   django:
     restart: always
