@@ -11,6 +11,9 @@ RUN yarn install
 
 COPY . .
 
+ENV REACT_APP_BACKEND_URL=http://ec2-52-207-91-151.compute-1.amazonaws.com:8000
+ENV REACT_APP_BACKEND_WS_URL=ws://ec2-52-207-91-151.compute-1.amazonaws.com:8000
+
 RUN yarn build
 
 # Stage 2: Serve the React app

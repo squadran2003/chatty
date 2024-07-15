@@ -14,9 +14,6 @@ services:
       build:
         context: ./chatty/frontend/
         dockerfile: production/Dockerfile
-      environment:
-        - REACT_APP_BACKEND_URL=http://ec2-52-207-91-151.compute-1.amazonaws.com:8000
-        - REACT_APP_WS_URL=ws://ec2-52-207-91-151.compute-1.amazonaws.com:8000
       volumes:
         - ./chatty/frontend:/usr/src/chatty/chatty/frontend
         - react-build:/usr/src/chatty/chatty/frontend/build
