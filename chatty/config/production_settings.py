@@ -41,7 +41,7 @@ def get_secrets():
 
 
 SECRETS = get_secrets()
-print(SECRETS)
+
 
 SECRET_KEY = SECRETS['SECRET_KEY']
 
