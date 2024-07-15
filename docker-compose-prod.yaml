@@ -42,7 +42,7 @@ services:
     volumes:
       - ./:/usr/src/chatty/
       - static:/usr/src/chatty/chatty/static/
-    expose:
+    ports:
       - 8080:8080
     networks:
       - config
