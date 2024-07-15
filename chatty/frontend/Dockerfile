@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm cache clean --force
 RUN npm install -g npm-check-updates
 RUN ncu -u
-RUN npm install
+RUN npm install -g 
 
 COPY . .
 

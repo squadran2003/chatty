@@ -23,6 +23,8 @@ services:
       command: >
         sh -c "
                npm run build "
+      networks:
+        - config
       stdin_open: true
   django:
     restart: always
