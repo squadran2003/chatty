@@ -5,9 +5,11 @@ import json
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["ec2-52-207-91-151.compute-1.amazonaws.com",]
 
-CSRF_TRUSTED_ORIGINS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    'ec2-52-207-91-151.compute-1.amazonaws.com',
+]
 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
