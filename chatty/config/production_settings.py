@@ -5,10 +5,10 @@ import json
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["http://ec2-52-207-91-151.compute-1.amazonaws.com",]
+ALLOWED_HOSTS = ["http://ec2-52-207-91-151.compute-1.amazonaws.com", "http://ec2-52-207-91-151.compute-1.amazonaws.com:8080",]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://ec2-52-207-91-151.compute-1.amazonaws.com',
+    'http://ec2-52-207-91-151.compute-1.amazonaws.com', "http://ec2-52-207-91-151.compute-1.amazonaws.com:8080",
 ]
 print(ALLOWED_HOSTS)
 print(CSRF_TRUSTED_ORIGINS)
