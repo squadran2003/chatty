@@ -20,9 +20,6 @@ services:
       volumes:
         - ./chatty/frontend:/usr/src/chatty/chatty/frontend
         - react-build:/usr/src/chatty/chatty/frontend/build
-      command: >
-        sh -c "
-               npm run build "
       networks:
         - config
       stdin_open: true

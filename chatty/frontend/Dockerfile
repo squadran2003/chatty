@@ -7,11 +7,9 @@ WORKDIR /usr/src/chatty/chatty/frontend/
 
 
 COPY package*.json ./
-RUN npm cache clean --force
-RUN npm install -g npm-check-updates
-RUN ncu -u
-RUN npm install -g 
+RUN yarn install
 
 COPY . .
 
+RUN yarn build
 
