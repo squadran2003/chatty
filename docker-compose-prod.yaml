@@ -22,6 +22,8 @@ services:
         - react-build:/usr/src/chatty/chatty/frontend/build
       networks:
         - config
+      ports:
+        - 80:80
       stdin_open: true
   django:
     restart: always
