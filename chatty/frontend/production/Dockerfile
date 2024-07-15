@@ -18,7 +18,7 @@ FROM nginx:alpine
 
 # remove nginx default config
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./nginx.conf /etc/nginx/conf.d
+COPY ./production/nginx.conf /etc/nginx/conf.d
 
 # Copy the built React app from the previous stage
 COPY --from=build /usr/src/chatty/chatty/frontend/build /usr/share/nginx/html
