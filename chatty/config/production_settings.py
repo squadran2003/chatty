@@ -10,7 +10,8 @@ ALLOWED_HOSTS = ["http://ec2-52-207-91-151.compute-1.amazonaws.com",]
 CSRF_TRUSTED_ORIGINS = [
     'http://ec2-52-207-91-151.compute-1.amazonaws.com',
 ]
-
+print(ALLOWED_HOSTS)
+print(CSRF_TRUSTED_ORIGINS)
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
