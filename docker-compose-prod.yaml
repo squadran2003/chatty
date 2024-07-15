@@ -43,7 +43,7 @@ services:
       - ./:/usr/src/chatty/
       - static:/usr/src/chatty/chatty/static/
     expose:
-      - 8000
+      - 8000:8000
     networks:
       - config
     depends_on:
