@@ -1,31 +1,24 @@
-// Sidebar.js
 import React, { Component } from 'react';
-import { Offcanvas, Navbar, Nav, Container, Badge } from 'react-bootstrap';
+import { Box, Drawer, AppBar, Toolbar, IconButton, Typography, List, ListItem, ListItemText, Badge, Container } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
+      mobileOpen: false,
       onlineUsers: [],
-      circleStyle: {
-        width: '20px',
-        height: '20px',
-        borderRadius: '50%',
-        display: 'inline-block',
-        backgroundColor: 'green',
-      },
     };
     this.onlineUsers = this.onlineUsers.bind(this);
   }
-    componentWillMount() {
-        console.log('component unmount')
-        this.onlineUsers();
-    }
+
+  componentDidMount() {
+    this.onlineUsers();
+  }
 
   onlineUsers = () => {
     const url = `${process.env.REACT_APP_WS_URL}/ws/chat/users/online_users/?token=${this.props.token}`;
-    console.log("url", url)
+    console.log("url", url);
     this.socket = new WebSocket(url);
     this.socket.onopen = (e) => {
       console.log('web socket open', e);
@@ -35,41 +28,80 @@ class Sidebar extends Component {
       const data = JSON.parse(e.data);
       console.log(data);
       this.setState({
-        onlineUsers: data.users
+        onlineUsers: data.users,
       });
     };
   }
 
-  handleClose = () => this.setState({ show: false });
-  handleShow = () => this.setState({ show: true });
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
 
   render() {
+    const { mobileOpen, onlineUsers } = this.state;
+
+    const drawer = (
+      <Box sx={{ width: 250 }} role="presentation" onClick={this.handleDrawerToggle} onKeyDown={this.handleDrawerToggle}>
+        <Typography variant="h6" sx={{ my: 2, textAlign: 'center' }}>
+          Online Users
+        </Typography>
+        <List>
+          {onlineUsers.map((user, index) => (
+            <ListItem key={index} button>
+              <Badge color="success" variant="dot" sx={{ mr: 2 }} />
+              <ListItemText primary={user} />
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    );
+
     return (
       <>
-        <Navbar bg="primary" expand="lg">
+        <AppBar position="static">
           <Container>
-            <Navbar.Brand href="#">Online</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={this.handleShow} />
+            <Toolbar>
+              <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                Online Users
+              </Typography>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="end"
+                onClick={this.handleDrawerToggle}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
           </Container>
-        </Navbar>
+        </AppBar>
 
-        <Offcanvas show={this.state.show} onHide={this.handleClose} responsive="lg">
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Online</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav>
-                {this.state.onlineUsers.map((user, index) => {
-                  return <Nav.Link key={index} href="#">
-                    <Badge pill bg="success" className="me-1" style={this.state.circleStyle}>
-                        &nbsp;
-                    </Badge>
-                    {user}
-                </Nav.Link>
-                })}
-            </Nav>
-          </Offcanvas.Body>
-        </Offcanvas>
+        <nav>
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={this.handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+            }}
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </nav>
       </>
     );
   }

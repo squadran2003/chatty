@@ -1,10 +1,5 @@
 import React from 'react';
-import { useState } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import InputGroup from 'react-bootstrap/InputGroup';
+import { Box, Button, TextField, Container, Typography } from '@mui/material';
 
 class Login extends React.Component {
     constructor(props) {
@@ -18,6 +13,14 @@ class Login extends React.Component {
             }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setUsername = this.setUsername.bind(this);
+        this.setPassword = this.setPassword.bind(this);
+    }
+    setUsername(username) {
+        this.setState({username: username});
+    }
+    setPassword(password) {
+        this.setState({password: password});
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -49,51 +52,47 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <div>
-                <Row className="mb-4 mt-5">
-                    <Col md={6} style={{ backgroundColor: 'white', margin:0, padding:5}}>
-                        <video autoPlay muted loop id="myVideo" className='w-100' style={{ border:"none"}}>
-                            <source src="https://botifywebappcreatedthumbnails.s3.eu-west-2.amazonaws.com/Screencast+from+07-16-2024+11%3A01%3A47+AM.webm" type="video/mp4" />
-                            Your browser does not support HTML5 video.
-                        </video>
-                    </Col>
-                    <Col md={6}>
-                        <Form className="mb-3 mt-5" onSubmit={this.handleSubmit}>
-                            <Row className="mb-3">
-                                <InputGroup hasValidation>
-                                    <Form.Group as={Col} controlId="username">
-                                        <Form.Label>Username</Form.Label>
-                                        <Form.Control
-                                            required
-                                            type="text"
-                                            isInvalid={this.state.Authentication.error}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {this.state.Authentication.message}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </InputGroup>
-                            </Row>
-                            <Row className="mb-3">
-                                <InputGroup hasValidation>
-                                    <Form.Group as={Col} controlId="password">
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control
-                                            required
-                                            type="password"
-                                            isInvalid={this.state.Authentication.error}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {this.state.Authentication.message}
-                                        </Form.Control.Feedback>
-                                        <Button type="submit" className='mt-2' variant="light">Login</Button>
-                                    </Form.Group>
-                                </InputGroup>
-                            </Row>
-                        </Form>
-                    </Col>
-                </Row>
-            </div>
+            <Container maxWidth="sm">
+            <Box component="form" onSubmit={this.handleSubmit} noValidate sx={{ mt: 5 }}>
+              <Typography variant="h5" component="h1" gutterBottom>
+                Login
+              </Typography>
+              <TextField
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                margin="normal"
+                variant="outlined"
+                value={this.state.username}
+                onChange={(e) => this.setUsername(e.target.value)}
+                error={this.state.Authentication.error}
+                helperText={this.state.Authentication.message}
+              />
+              <TextField
+                required
+                fullWidth
+                id="password"
+                label="Password"
+                type="password"
+                margin="normal"
+                variant="outlined"
+                value={this.state.password}
+                onChange={(e) => this.setPassword(e.target.value)}
+                error={this.state.Authentication.error}
+                helperText={this.state.Authentication.message}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+              >
+                Login
+              </Button>
+            </Box>
+          </Container>
         );
     }
 }

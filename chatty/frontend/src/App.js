@@ -7,6 +7,7 @@ import Nav from './nav.js';
 import Login from './pages/login.js';
 import Logout from './pages/logout.js';
 import Home from './pages/home.js';
+import Intro from './pages/intro.js';
 
 class App extends React.Component {
   constructor(props){
@@ -67,7 +68,7 @@ class App extends React.Component {
          <Nav loggedIn={this.state.loggedIn}/>
           <Container fluid>
             <Routes>
-                <Route path="/" element={this.state.loggedIn?<Home token={this.state.token}/>:<Login/>}/>
+                <Route path="/" element={this.state.loggedIn?<Home token={this.state.token}/>:<Intro/>}/>
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path="/login" element={<Login/>}/>
             </Routes>

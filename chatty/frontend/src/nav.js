@@ -1,25 +1,44 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import NavbarText from 'react-bootstrap/esm/NavbarText';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+// import Container from 'react-bootstrap/Container';
+// import NavbarText from 'react-bootstrap/esm/NavbarText';
+// import Nav from 'react-bootstrap/Nav';
+// import Navbar from 'react-bootstrap/Navbar';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function defaultNav({loggedIn}){
-  let navBarTextLink = <Nav.Link href="/login">Login</Nav.Link>;
+  let navBarTextLink = <Button color="inherit" component={Link} to="/login">Login</Button>;
   if(loggedIn){
-    navBarTextLink = <Nav.Link href="/logout">Logout</Nav.Link>;
+    navBarTextLink = <Button color="inherit" component={Link} to="/logout">Logout</Button>;
   }
   return (
-    <Navbar bg="dark" data-bs-theme="dark" className='p-2'>
-          <Navbar.Brand href="/">Chatty.io</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-          </Nav>
-        <NavbarText>
-          {navBarTextLink}
-        </NavbarText>
-    </Navbar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            component={Link} to="/"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Chatty.io
+          </Typography>
+         {navBarTextLink}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
 
