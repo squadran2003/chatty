@@ -51,21 +51,6 @@ class Chat extends React.Component {
   }
 
 
-  // onlineUsers = () => {
-  //   const url = `${process.env.REACT_APP_WS_URL}/ws/chat/users/online_users/?token=${this.props.token}`;
-  //   this.socket = new WebSocket(url);
-  //   this.socket.onopen = (e) => {
-  //     console.log('web socket open', e);
-  //   };
-
-  //   this.socket.onmessage = (e) => {
-  //     const data = JSON.parse(e.data);
-  //     console.log(data);
-  //     this.setState({
-  //       onlineUsers: data.users
-  //     });
-  //   };
-  // }
   chatMessageInputKeyPress = (e) => {
     if (e.key === 'Enter') {
       this.sendMessage(this.chatMessageInput.current.value);
@@ -130,7 +115,7 @@ class Chat extends React.Component {
               </div>
             </Col>
             <Col className="mt-2" sm={12} md={2}>
-              <Form.Control ref={this.sendButton} type="submit" value="Send" className="btn btn-primary" onClick={this.buttonClicked}/>
+              <Form.Control ref={this.sendButton} type="submit" value="Send" className="btn btn-light" onClick={this.buttonClicked}/>
             </Col>
           </Row>
         </Col>

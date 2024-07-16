@@ -46,7 +46,7 @@ class Sidebar extends Component {
   render() {
     return (
       <>
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="primary" expand="lg">
           <Container>
             <Navbar.Brand href="#">Online</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={this.handleShow} />

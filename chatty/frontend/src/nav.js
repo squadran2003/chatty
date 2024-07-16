@@ -11,7 +11,7 @@ function defaultNav({loggedIn}){
     navBarTextLink = <Nav.Link href="/logout">Logout</Nav.Link>;
   }
   return (
-    <Navbar bg="primary" data-bs-theme="dark" className='p-2'>
+    <Navbar bg="dark" data-bs-theme="dark" className='p-2'>
           <Navbar.Brand href="/">Chatty.io</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>

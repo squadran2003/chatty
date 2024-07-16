@@ -49,47 +49,51 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <Form className="mb-3 mt-4" onSubmit={this.handleSubmit}>
-                <Row className="mb-3">
-                    <InputGroup hasValidation>
-                        <Form.Group as={Col} md="4">
-
-                        </Form.Group>
-                            <Form.Group as={Col} md="4" controlId="username">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    isInvalid={this.state.Authentication.error}
-                                />
-                                <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
-                            </Form.Group>
-                        <Form.Group as={Col} md="4">
-                        
-                        </Form.Group>
-                    </InputGroup>
+            <div>
+                <Row className="mb-4 mt-5">
+                    <Col md={6} style={{ backgroundColor: 'white', margin:0, padding:5}}>
+                        <video autoPlay muted loop id="myVideo" className='w-100' style={{ border:"none"}}>
+                            <source src="https://botifywebappcreatedthumbnails.s3.eu-west-2.amazonaws.com/Screencast+from+07-16-2024+11%3A01%3A47+AM.webm" type="video/mp4" />
+                            Your browser does not support HTML5 video.
+                        </video>
+                    </Col>
+                    <Col md={6}>
+                        <Form className="mb-3 mt-5" onSubmit={this.handleSubmit}>
+                            <Row className="mb-3">
+                                <InputGroup hasValidation>
+                                    <Form.Group as={Col} controlId="username">
+                                        <Form.Label>Username</Form.Label>
+                                        <Form.Control
+                                            required
+                                            type="text"
+                                            isInvalid={this.state.Authentication.error}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {this.state.Authentication.message}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </InputGroup>
+                            </Row>
+                            <Row className="mb-3">
+                                <InputGroup hasValidation>
+                                    <Form.Group as={Col} controlId="password">
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control
+                                            required
+                                            type="password"
+                                            isInvalid={this.state.Authentication.error}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {this.state.Authentication.message}
+                                        </Form.Control.Feedback>
+                                        <Button type="submit" className='mt-2' variant="light">Login</Button>
+                                    </Form.Group>
+                                </InputGroup>
+                            </Row>
+                        </Form>
+                    </Col>
                 </Row>
-                <Row className="mb-3">
-                    <InputGroup hasValidation>
-                        <Form.Group as={Col} md="4">
-                        
-                        </Form.Group>
-                        <Form.Group as={Col} md="4" controlId="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                required
-                                type="password"
-                                isInvalid={this.state.Authentication.error}
-                            />
-                            <Form.Control.Feedback type="invalid">{this.state.Authentication.message}</Form.Control.Feedback>
-                            <Button type="submit" className='mt-2'>Login</Button>
-                        </Form.Group>
-                        <Form.Group as={Col} md="4">
-                        
-                        </Form.Group>
-                    </InputGroup>
-                </Row>
-        </Form>
+            </div>
         );
     }
 }
