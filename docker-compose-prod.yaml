@@ -17,6 +17,9 @@ services:
       volumes:
         - ./chatty/frontend:/usr/src/chatty/chatty/frontend
         - react-build:/usr/src/chatty/chatty/frontend/build
+      environment:
+        - REACT_APP_BACKEND_URL=http://ec2-52-207-91-151.compute-1.amazonaws.com:8080
+        - REACT_APP_WS_URL=ws://ec2-52-207-91-151.compute-1.amazonaws.com:8080
       networks:
         - config
       ports:
