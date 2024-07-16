@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 import json
 
 DEBUG = False
-ec2-52-207-91-151.compute-1.amazonaws.com:8080
+
 
 ALLOWED_HOSTS = ["http://ec2-52-207-91-151.compute-1.amazonaws.com",]
 
