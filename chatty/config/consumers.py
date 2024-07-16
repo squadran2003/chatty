@@ -86,15 +86,24 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
+        token = text_data_json["token"]
 
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name, {"type": "chat_message", "message": message}
+            self.room_group_name, {"type": "chat_message", "message": message, "token": token}
         )
 
     # Receive message from room group
     def chat_message(self, event):
-        message = self.user.username+" : "+event["message"]
+        token = event["token"]
+        from rest_framework_simplejwt.tokens import UntypedToken
+        import jwt
+        from django.contrib.auth.models import User
+        UntypedToken(token)
+        decoded_data = jwt.decode(token, options={"verify_signature": False})
+        user_id = decoded_data["user_id"]
+        user = User.objects.get(id=user_id)
+        message = user.username+': '+event["message"]
 
         # Send message to WebSocket
         self.send(text_data=json.dumps({"message": message}))

@@ -81,7 +81,8 @@ class Chat extends React.Component {
   }
   sendMessage(message) {
     this.socket.send(JSON.stringify({
-        'message': message
+        'message': message,
+        'token': this.props.token
     }));
   }
   getEmoji = (event) => {
