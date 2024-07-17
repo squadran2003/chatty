@@ -8,6 +8,7 @@ class Chat extends React.Component {
     super(props);
     this.state = {
       mobileOpen: false,
+      messages:"",
     };
 
     this.socket = null;
@@ -21,6 +22,13 @@ class Chat extends React.Component {
       }
     };
   }
+  // when view port is mobile change the state of mobileOpen to true
+
+
+  appendText = () => {
+    this.sendMessage(this.chatMessageInput.current.value);
+    this.chatMessageInput.current.value = '';
+  };
 
   handleDrawerToggle = () => {
     this.setState((prevState) => ({
@@ -36,8 +44,9 @@ class Chat extends React.Component {
     };
     this.socket.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log(data);
-      this.chatDisplay.current.value += data.message + '\n';
+      this.setState((prevState) => ({
+        messages: prevState.messages + '\n' + data.message,
+      }));
     };
   }
 
@@ -72,72 +81,15 @@ class Chat extends React.Component {
   };
 
   render() {
-    const drawer = (
-      <Sidebar token={this.props.token} />
-    );
+
 
     return (
-      <Box sx={{ display: 'flex' }}>
-        {/* <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={this.handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Chatty.io
-            </Typography>
-          </Toolbar>
-        </AppBar> */}
-        <Box component="nav">
-          <Drawer
-            variant="temporary"
-            open={this.state.mobileOpen}
-            onClose={this.handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true,
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
-            }}
-          >
-            {drawer}
-          </Drawer>
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: 'none', sm: 'block' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
-            }}
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            width: { sm: `calc(100% - 240px)` },
-          }}
-        >
-          <Toolbar />
           <Grid container spacing={2}>
-            <Grid item xs={12} md={8}>
-              <TextField
-                multiline
-                fullWidth
-                variant="outlined"
-                inputRef={this.chatDisplay}
-                style={{ height: '70vh' }}
-              />
+            <Grid item xs={12} md={12} sx={{ mt: 2 }}>
+              <Box ref={this.chatDisplay} component="section" sx={{ p: 1, border: '1px solid grey' }}
+                style={{ minHeight: '80vh', overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
+                  {this.state.messages}
+              </Box>
               <Grid container spacing={2} sx={{ mt: 2 }}>
                 <Grid item xs={12} md={8}>
                   <TextField
@@ -153,7 +105,16 @@ class Chat extends React.Component {
                     <span onClick={this.getEmoji} value="&#128512;" aria-label="smile" style={this.styles.emoji}>&#128512;</span>
                     <span onClick={this.getEmoji} value="&#128513;" aria-label="smile" style={this.styles.emoji}>&#128513;</span>
                     <span onClick={this.getEmoji} value="&#128514;" aria-label="smile" style={this.styles.emoji}>&#128514;</span>
-                    {/* Add more emojis as needed */}
+                    <span onClick={this.getEmoji} value="&#128515;" aria-label="smile" style={this.styles.emoji}>&#128515;</span>
+                    <span onClick={this.getEmoji} value="&#128516;" aria-label="smile" style={this.styles.emoji}>&#128516;</span>
+                    <span onClick={this.getEmoji} value="&#128517;" aria-label="smile" style={this.styles.emoji}>&#128517;</span>
+                    <span onClick={this.getEmoji} value="&#128518;" aria-label="smile" style={this.styles.emoji}>&#128518;</span>
+                    <span onClick={this.getEmoji} value="&#128519;" aria-label="smile" style={this.styles.emoji}>&#128519;</span>
+                    <span onClick={this.getEmoji} value="&#128520;" aria-label="smile" style={this.styles.emoji}>&#128520;</span>
+                    <span onClick={this.getEmoji} value="&#128521;" aria-label="smile" style={this.styles.emoji}>&#128521;</span>
+                    <span onClick={this.getEmoji} value="&#128522;" aria-label="smile" style={this.styles.emoji}>&#128522;</span>
+                    <span onClick={this.getEmoji} value="&#128523;" aria-label="smile" style={this.styles.emoji}>&#128523;</span>
+                    <span onClick={this.getEmoji} value="&#128524;" aria-label="smile" style={this.styles.emoji}>&#128524;</span>
                   </Box>
                 </Grid>
                 <Grid item xs={12} md={2}>
@@ -161,7 +122,7 @@ class Chat extends React.Component {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    onClick={this.buttonClicked}
+                    onClick={this.appendText}
                     ref={this.sendButton}
                   >
                     Send
@@ -170,8 +131,6 @@ class Chat extends React.Component {
               </Grid>
             </Grid>
           </Grid>
-        </Box>
-      </Box>
     );
   }
 }
