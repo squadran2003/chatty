@@ -2,6 +2,7 @@ import React from "react";
 import { Drawer, AppBar, Toolbar, IconButton, Typography, Button, TextField, Box, Grid } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from "../components/sidebar";
+import SendIcon from '@mui/icons-material/Send';
 
 class Chat extends React.Component {
   constructor(props) {
@@ -56,12 +57,7 @@ class Chat extends React.Component {
     }
   }
 
-  chatMessageInputKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.sendMessage(this.chatMessageInput.current.value);
-      this.chatMessageInput.current.value = '';
-    }
-  };
+
 
   buttonClicked = () => {
     this.sendMessage(this.chatMessageInput.current.value);
@@ -84,49 +80,52 @@ class Chat extends React.Component {
 
 
     return (
-          <Grid container spacing={2}>
+          <Grid container>
             <Grid item xs={12} md={12} sx={{ mt: 2 }}>
-              <Box ref={this.chatDisplay} component="section" sx={{ p: 1, border: '1px solid grey' }}
-                style={{ minHeight: '80vh', overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
+              <Box ref={this.chatDisplay} component="section"
+                style={{ minHeight: '65vh', overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
                   {this.state.messages}
               </Box>
               <Grid container spacing={2} sx={{ mt: 2 }}>
                 <Grid item xs={12} md={8}>
                   <TextField
                     fullWidth
+                    multiline
                     variant="outlined"
                     placeholder="Enter message"
-                    onKeyUp={this.chatMessageInputKeyPress}
                     inputRef={this.chatMessageInput}
+                    rows={1}  // Minimum number of rows
+                    rowsMax={1}  // Maximum number of rows
+                    overflowY="auto"
                   />
                 </Grid>
                 <Grid item xs={12} md={2}>
-                  <Box>
-                    <span onClick={this.getEmoji} value="&#128512;" aria-label="smile" style={this.styles.emoji}>&#128512;</span>
-                    <span onClick={this.getEmoji} value="&#128513;" aria-label="smile" style={this.styles.emoji}>&#128513;</span>
-                    <span onClick={this.getEmoji} value="&#128514;" aria-label="smile" style={this.styles.emoji}>&#128514;</span>
-                    <span onClick={this.getEmoji} value="&#128515;" aria-label="smile" style={this.styles.emoji}>&#128515;</span>
-                    <span onClick={this.getEmoji} value="&#128516;" aria-label="smile" style={this.styles.emoji}>&#128516;</span>
-                    <span onClick={this.getEmoji} value="&#128517;" aria-label="smile" style={this.styles.emoji}>&#128517;</span>
-                    <span onClick={this.getEmoji} value="&#128518;" aria-label="smile" style={this.styles.emoji}>&#128518;</span>
-                    <span onClick={this.getEmoji} value="&#128519;" aria-label="smile" style={this.styles.emoji}>&#128519;</span>
-                    <span onClick={this.getEmoji} value="&#128520;" aria-label="smile" style={this.styles.emoji}>&#128520;</span>
-                    <span onClick={this.getEmoji} value="&#128521;" aria-label="smile" style={this.styles.emoji}>&#128521;</span>
-                    <span onClick={this.getEmoji} value="&#128522;" aria-label="smile" style={this.styles.emoji}>&#128522;</span>
-                    <span onClick={this.getEmoji} value="&#128523;" aria-label="smile" style={this.styles.emoji}>&#128523;</span>
-                    <span onClick={this.getEmoji} value="&#128524;" aria-label="smile" style={this.styles.emoji}>&#128524;</span>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} md={2}>
                   <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    onClick={this.appendText}
-                    ref={this.sendButton}
-                  >
-                    Send
-                  </Button>
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={this.appendText}
+                      ref={this.sendButton}
+                    >
+                      <SendIcon/>
+                    </Button>
+                </Grid>
+                <Grid item xs={12} md={2} sx={{ display: { xs: 'none', md: 'block' } }}>
+                  <Box>
+                      <span onClick={this.getEmoji} value="&#128512;" aria-label="smile" style={this.styles.emoji}>&#128512;</span>
+                      <span onClick={this.getEmoji} value="&#128513;" aria-label="smile" style={this.styles.emoji}>&#128513;</span>
+                      <span onClick={this.getEmoji} value="&#128514;" aria-label="smile" style={this.styles.emoji}>&#128514;</span>
+                      <span onClick={this.getEmoji} value="&#128515;" aria-label="smile" style={this.styles.emoji}>&#128515;</span>
+                      <span onClick={this.getEmoji} value="&#128516;" aria-label="smile" style={this.styles.emoji}>&#128516;</span>
+                      <span onClick={this.getEmoji} value="&#128517;" aria-label="smile" style={this.styles.emoji}>&#128517;</span>
+                      <span onClick={this.getEmoji} value="&#128518;" aria-label="smile" style={this.styles.emoji}>&#128518;</span>
+                      <span onClick={this.getEmoji} value="&#128519;" aria-label="smile" style={this.styles.emoji}>&#128519;</span>
+                      <span onClick={this.getEmoji} value="&#128520;" aria-label="smile" style={this.styles.emoji}>&#128520;</span>
+                      <span onClick={this.getEmoji} value="&#128521;" aria-label="smile" style={this.styles.emoji}>&#128521;</span>
+                      <span onClick={this.getEmoji} value="&#128522;" aria-label="smile" style={this.styles.emoji}>&#128522;</span>
+                      <span onClick={this.getEmoji} value="&#128523;" aria-label="smile" style={this.styles.emoji}>&#128523;</span>
+                      <span onClick={this.getEmoji} value="&#128524;" aria-label="smile" style={this.styles.emoji}>&#128524;</span>
+                    </Box>
                 </Grid>
               </Grid>
             </Grid>
