@@ -20,9 +20,15 @@ RUN yarn build
 FROM nginx:alpine
 
 
-# Install Certbot and the Nginx plugin for Certbot
-RUN apk add --no-cache certbot py3-pip
-RUN pip3 install certbot-nginx
+# Install necessary dependencies
+RUN apk add --no-cache certbot python3 py3-pip py3-virtualenv
+
+# Create and activate a virtual environment
+RUN python3 -m venv /opt/certbot/
+ENV PATH="/opt/certbot/bin:$PATH"
+
+# Install Certbot and the Nginx plugin in the virtual environment
+RUN pip install certbot-nginx
 
 # remove nginx default config
 RUN rm /etc/nginx/conf.d/default.conf
