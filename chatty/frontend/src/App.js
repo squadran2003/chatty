@@ -21,6 +21,7 @@ class App extends React.Component {
   componentWillMount(){
     const token = localStorage.getItem("token")
     const refresh = localStorage.getItem("refresh_token")
+    console.log(token)
     if(!token){
       return
     }

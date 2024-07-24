@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Button, TextField, Container, Typography } from '@mui/material';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleLoginButton from '../components/googleLoginButton';
 
 class Login extends React.Component {
     constructor(props) {
@@ -10,12 +12,25 @@ class Login extends React.Component {
             Authentication:{
                 error: false,
                 message: ''
-            }
+            },
+            googleClientId:undefined
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.setPassword = this.setPassword.bind(this);
     }
+
+    componentWillMount() {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/get-google-client-id/`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          this.setState({googleClientId: data.googleClientId})
+        })
+        .catch(error => console.error(error));
+        
+    };
+
     setUsername(username) {
         this.setState({username: username});
     }
@@ -91,6 +106,11 @@ class Login extends React.Component {
               >
                 Login
               </Button>
+              {this.state.googleClientId && (
+                <GoogleOAuthProvider clientId={this.state.googleClientId}>
+                  <GoogleLoginButton />
+                </GoogleOAuthProvider>
+              )}
             </Box>
           </Container>
         );

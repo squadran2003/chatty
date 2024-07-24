@@ -42,6 +42,7 @@ DJANGO_SETTINGS_MODULE = config('DJANGO_SETTINGS_MODULE', default=os.environ.get
 
 INSTALLED_APPS = [
     "daphne",
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,6 +130,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -178,5 +184,13 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+SITE_ID = 2
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # Your React app's URL
+]
+
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID', default=os.environ.get('GOOGLE_CLIENT_ID'))

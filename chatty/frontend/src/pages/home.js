@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from "../components/sidebar";
 import SendIcon from '@mui/icons-material/Send';
 
+
 class Chat extends React.Component {
   constructor(props) {
     super(props);

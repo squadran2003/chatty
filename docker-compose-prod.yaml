@@ -17,6 +17,7 @@ services:
       volumes:
         - ./chatty/frontend:/usr/src/chatty/chatty/frontend
         - react-build:/usr/src/chatty/chatty/frontend/build
+      
       networks:
         - config
       ports:

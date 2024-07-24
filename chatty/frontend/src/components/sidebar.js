@@ -17,7 +17,7 @@ class Sidebar extends Component {
   }
 
   onlineUsers = () => {
-    const url = `${process.env.REACT_APP_WS_URL}/ws/chat/users/online_users/?token=${this.props.token}`;
+    const url = `http://localhost:8080/ws/chat/users/online_users/?token=${this.props.token}`;
     console.log("url", url);
     this.socket = new WebSocket(url);
     this.socket.onopen = (e) => {

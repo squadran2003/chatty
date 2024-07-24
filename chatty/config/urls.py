@@ -25,8 +25,10 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/get-google-client-id/', views.get_google_client_id, name='get_google_client_id'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/google/', views.GoogleLogin.as_view(), name='google_login'),
     path("chat/<str:room_name>/", views.room, name="room"),
     path("chat/users/<str:online_users>/", views.users, name="users"),
     path("", views.index, name="index.html"),
