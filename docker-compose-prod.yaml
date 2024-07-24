@@ -23,6 +23,7 @@ services:
         - config
       ports:
         - 80:80
+        - 443:443
       stdin_open: true
   django:
     restart: always
