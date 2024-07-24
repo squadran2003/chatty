@@ -21,7 +21,8 @@ FROM nginx:alpine
 
 
 # Install Certbot and the Nginx plugin for Certbot
-RUN apk add --no-cache certbot python3-certbot-nginx
+RUN apk add --no-cache certbot py3-pip
+RUN pip3 install certbot-nginx
 
 # remove nginx default config
 RUN rm /etc/nginx/conf.d/default.conf
