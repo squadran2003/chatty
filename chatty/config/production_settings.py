@@ -9,7 +9,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["chattymusic.com",]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://ec2-52-207-91-151.compute-1.amazonaws.com',
+    'http://chattymusic.com',
 ]
 print(ALLOWED_HOSTS)
 print(CSRF_TRUSTED_ORIGINS)
