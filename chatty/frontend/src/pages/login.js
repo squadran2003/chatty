@@ -24,7 +24,6 @@ class Login extends React.Component {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/api/get-google-client-id/`)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           this.setState({googleClientId: data.googleClientId})
         })
         .catch(error => console.error(error));
@@ -40,7 +39,6 @@ class Login extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         let url = `${process.env.REACT_APP_BACKEND_URL}/api/token/`;
-        console.log(url);
         // send a POST request to the backend
         fetch(url, {
             method: 'POST',
