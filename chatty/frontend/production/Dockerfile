@@ -11,7 +11,7 @@ RUN yarn install
 
 COPY . .
 
-ENV REACT_APP_BACKEND_URL=http://chattymusic.com:8080
+ENV REACT_APP_BACKEND_URL=https://chattymusic.com:8080
 ENV REACT_APP_WS_URL=ws://chattymusic.com:8080
 
 RUN yarn build
