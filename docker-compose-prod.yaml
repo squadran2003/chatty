@@ -44,7 +44,6 @@ services:
       - static:/usr/src/chatty/chatty/static/
     ports:
       - 8080:8080
-      - 443:443
     networks:
       - config
     depends_on:
