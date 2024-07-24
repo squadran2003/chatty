@@ -39,6 +39,7 @@ COPY --from=build /usr/src/chatty/chatty/frontend/build /usr/share/nginx/html
 
 # Expose the port the app runs on
 EXPOSE 80
+EXPOSE 443
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]
