@@ -6,7 +6,7 @@ import json
 DEBUG = False
 
 
-ALLOWED_HOSTS = ["ec2-52-207-91-151.compute-1.amazonaws.com",]
+ALLOWED_HOSTS = ["chattymusic.com",]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://ec2-52-207-91-151.compute-1.amazonaws.com',
