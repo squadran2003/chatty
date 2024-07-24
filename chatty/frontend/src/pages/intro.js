@@ -15,21 +15,18 @@ function Intro() {
         }}
       >
         <Typography variant="h3" component="h1" gutterBottom>
-          Welcome to Chatty
+          Welcome to ChattyMusic
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom>
-          Connect with Friends and Family
+          Connect with Friends and Family to talk about Music
         </Typography>
         <Typography variant="body1" paragraph>
-          Chatty is the ultimate platform to stay connected with your loved ones. 
-          Whether you want to catch up with friends or share moments with family, 
-          Chatty makes it easy and fun. Create your own channels, join group chats, 
-          and never miss a moment.
+          ChattyMusic is a messaging app that allows you to connect with
+          friends and family to talk about music. Share your favorite songs,
+          albums, and artists, and discover new music from others.
         </Typography>
         <Typography variant="body1" paragraph>
-          Experience seamless messaging with a user-friendly interface and 
-          powerful features. Start conversations, share media, and enjoy 
-          real-time communication like never before.
+          Experience the joy of music with ChattyMusic.
         </Typography>
         <Button component={Link} to="/login" variant="contained" color="primary" size="large" href="/signup" sx={{ mt: 4 }}>
           Get Started

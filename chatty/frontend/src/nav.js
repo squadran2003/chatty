@@ -33,7 +33,7 @@ function defaultNav({loggedIn}){
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Chatty.io
+            ChattyMusic
           </Typography>
          {navBarTextLink}
         </Toolbar>
