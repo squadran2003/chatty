@@ -10,6 +10,7 @@ ALLOWED_HOSTS = ["chattymusic.com",]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chattymusic.com',
+    'http://chattymusic.com',
 ]
 print(ALLOWED_HOSTS)
 print(CSRF_TRUSTED_ORIGINS)
