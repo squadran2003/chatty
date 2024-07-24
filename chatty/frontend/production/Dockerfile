@@ -19,6 +19,8 @@ RUN yarn build
 # Stage 2: Serve the React app
 FROM nginx:alpine
 
+RUN apt-get install -y --no-install-recommends certbot python3-certbot-nginx
+
 # remove nginx default config
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./production/nginx.conf /etc/nginx/conf.d
