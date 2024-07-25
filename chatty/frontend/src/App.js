@@ -14,10 +14,19 @@ import { red, teal } from '@mui/material/colors';
 let theme = createTheme({
   palette: {
     primary: {
-      main: red[500],
+      main: '#2196f3', // Blue color
     },
     secondary: {
-      main: teal[500],
+      main: '#757575', // Grey color
+    },
+    background: {
+      default: '#f5f5f5', // Light grey background for better readability
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, Arial, sans-serif',
+    h1: {
+      fontSize: '2.5rem',
     },
   },
 });

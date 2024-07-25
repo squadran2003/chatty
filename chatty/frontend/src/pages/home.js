@@ -86,12 +86,23 @@ class Chat extends React.Component {
 
     return (
           <Grid container>
-            <Grid item xs={12} md={12} sx={{ mt: 2 }}>
+            <Grid item xs={12} md={12}>
               <Box ref={this.chatDisplay} component="section"
-                style={{ minHeight: '69vh', overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
+               sx={{
+                overflowY: 'auto', 
+                whiteSpace: 'pre-wrap',
+                width: {
+                  xs: '100%', // 100% width on extra-small screens
+                  md: '80%'   // 80% width on medium screens and up
+                },
+                height: {
+                  xs: '75vh', // 100% width on extra-small screens
+                  md: '85vh'   // 80% width on medium screens and up
+                },
+              }}>
                   {this.state.messages}
               </Box>
-              <Grid container spacing={2} sx={{ mt: 2 }}>
+              <Grid container spacing={2}>
                 <Grid item xs={12} md={8}>
                   <TextField
                     fullWidth
