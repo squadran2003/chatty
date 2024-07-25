@@ -19,7 +19,6 @@ services:
     environment:
       # - change this to your settings file
       - DJANGO_SETTINGS_MODULE=config.settings
-      - REACT_APP_DEV=1
 
     command: >
       sh -c "
@@ -49,8 +48,10 @@ services:
       - ./chatty/frontend:/usr/src/chatty/chatty/frontend
     environment:
       # set to your production settings file
-      - REACT_APP_BACKEND_URL=http://localhost:8080
-      - REACT_APP_WS_URL=ws://localhost:8080
+      - REACT_APP_BACKEND_URL=localhost:8080
+      - REACT_APP_BACKEND_PROTOCOL=http
+      - REACT_APP_WS_URL=localhost:8080
+      - REACT_APP_WS_PROTOCOL=ws
     ports:
       - 3000:3000
     stdin_open: true

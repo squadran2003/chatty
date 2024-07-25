@@ -12,7 +12,9 @@ RUN yarn install
 COPY . .
 
 ENV REACT_APP_BACKEND_URL=/api
-ENV REACT_APP_WS_URL=ws://chattymusic.com/api
+ENV REACT_APP_BACKEND_PROTOCOL=https
+ENV REACT_APP_WS_URL=/api
+ENV REACT_APP_WS_PROTOCOL=ws
 
 RUN yarn build
 

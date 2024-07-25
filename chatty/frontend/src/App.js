@@ -27,8 +27,8 @@ class App extends React.Component {
     }
     console.log(token)
     // send a POST request to the backend
-    let url1 = `${process.env.REACT_APP_BACKEND_URL}/chat/lobby/`;
-    let url2 = `${process.env.REACT_APP_BACKEND_URL}/api/token/refresh/`;
+    let url1 = `${process.env.REACT_APP_BACKEND_PROTOCOL}://${process.env.REACT_APP_BACKEND_URL}/chat/lobby/`;
+    let url2 = `${process.env.REACT_APP_WS_PROTOCOL}://${process.env.REACT_APP_BACKEND_URL}/api/token/refresh/`;
     fetch(url1, {
       method: 'GET',
       headers: {

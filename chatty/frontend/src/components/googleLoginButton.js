@@ -6,7 +6,7 @@ class GoogleLoginButton extends React.Component {
         super(props);
     }
     handleLoginSuccess = async (response) => {
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/google/`, {
+      fetch(`${process.env.REACT_APP_BACKEND_PROTOCOL}://${process.env.REACT_APP_BACKEND_URL}/auth/google/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

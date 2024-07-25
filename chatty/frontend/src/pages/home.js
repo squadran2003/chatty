@@ -39,7 +39,7 @@ class Chat extends React.Component {
   };
 
   componentDidMount() {
-    const url = `${process.env.REACT_APP_WS_URL}/ws/chat/lobby/?token=${this.props.token}`;
+    const url = `${process.env.REACT_APP_WS_PROTOCOL}://${process.env.REACT_APP_BACKEND_URL}/ws/chat/lobby/?token=${this.props.token}`;
     this.socket = new WebSocket(url);
     this.socket.onopen = (e) => {
       console.log('WebSocket open', e);

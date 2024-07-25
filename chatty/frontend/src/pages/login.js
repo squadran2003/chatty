@@ -19,9 +19,8 @@ class Login extends React.Component {
         this.setUsername = this.setUsername.bind(this);
         this.setPassword = this.setPassword.bind(this);
     }
-
     componentWillMount() {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/get-google-client-id/`)
+        fetch(`${process.env.REACT_APP_BACKEND_PROTOCOL}://${process.env.REACT_APP_BACKEND_URL}/api/get-google-client-id/`)
         .then(response => response.json())
         .then(data => {
           this.setState({googleClientId: data.googleClientId})
@@ -38,7 +37,7 @@ class Login extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        let url = `${process.env.REACT_APP_BACKEND_URL}/api/token/`;
+        let url = `${process.env.REACT_APP_BACKEND_PROTOCOL}://${process.env.REACT_APP_BACKEND_URL}/api/token/`;
         // send a POST request to the backend
         fetch(url, {
             method: 'POST',
