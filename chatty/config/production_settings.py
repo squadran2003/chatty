@@ -6,7 +6,7 @@ import json
 DEBUG = False
 
 
-ALLOWED_HOSTS = ["chattymusic.com",]
+ALLOWED_HOSTS = ["chattymusic.com", "172.18.0.3", ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://chattymusic.com',
